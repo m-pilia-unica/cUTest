@@ -1,0 +1,75 @@
+/*!
+ * \mainpage cUTest - C Unit Test framework
+ *
+ * cUTest is a unit test framework written in C language.
+ *
+ * \section usage Usage
+ * cUTest in organized in test cases and suites. A test case is basically
+ * a procedure containing some code to be executed, and one or more asserts.
+ * When an assert fails, the test case execution is interrupted and the
+ * test is considered failed (eventual code following the failed assert
+ * is not executed).
+ *
+ * A suite is a collection of test cases which are executed sequentially,
+ * according to the order followed to add them to the suite. A suite may
+ * contain also a BEFORE_TEST(name) procedure, which is executed once
+ * before every test case execution, containing initialization statements
+ * useful for each tests, and a AFTER_TEST(name) procedure, which is 
+ * executed once after each test case execution, even if the test exited
+ * due to an error or a signal, and contains cleanup statements.
+ *
+ * Test case must be declared before outside all functions and before theyr
+ * usage. A suite may be declared inside a main routine.
+ *
+ * The most general test has the following structure:
+ *
+ * \code
+ * #include <cutest.h>
+ *
+ * // declaration of before procedure
+ * BEFORE_TEST(before_proc_name)
+ * {
+ *     // init statements
+ * }
+ * 
+ * // declaration of after procedure
+ * AFTER_TEST(after_proc_name)
+ * {
+ *     // cleanup statements
+ * }
+ * 
+ * // test case declarations
+ *
+ * TEST_CASE(test_name_1)
+ * {
+ *     // eventual statements
+ *
+ *     assert(x == y, "Assertion description"); // assertion
+ * }
+ * 
+ * TEST_CASE(test_name_2)
+ * {
+ *     // eventual statements
+ *
+ *     assert(x == y, "Assertion description"); // assertion
+ * }
+ *
+ * // test entry point
+ * int main()
+ * {
+ *     Suite *s; // suite declaration
+ *
+ *     // suite initialization
+ *     suite_new(&s, "Example suite", before_proc_name, after_proc_name);
+ *     
+ *     // add test cases to the suite
+ *     suite_add(s, test_name_1, "Test #1");
+ *     suite_add(s, test_name_2, "Test #2");
+ *
+ *     // launch the suite execution
+ *     suite_run(s);
+ *
+ *     return 0;
+ * }
+ * \endcode
+ */
