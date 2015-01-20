@@ -12,12 +12,6 @@ To automatically build the library in a Unix-like environment (requires
 make
 ```
 
-To build and run the library unit test (requires
-[check](http://check.sourceforge.net/)):
-
-```bash
-make test
-```
 
 To build the library documentation (requires [Doxygen](http://www.doxygen.org)):
 
